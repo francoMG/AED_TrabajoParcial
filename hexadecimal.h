@@ -1,4 +1,8 @@
 
+/*
+    Funte: http://www.solveet.com/exercises/decimal-a-hexadecimal-/605/solution-3229
+*/
+
 string DtoH(short num){
 
     string res;
