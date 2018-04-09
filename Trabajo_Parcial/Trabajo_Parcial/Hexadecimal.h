@@ -11,16 +11,15 @@ string addCeros(string s, int cant) {
 string DtoH(int num, int size) {
 
 	string s;
-	char buffer[8];
+	char buffer[8] = { 0,0,0,0,0,0,0,0 };
 	itoa(num, buffer, 16);
 
-	int aux = num / 16;
-	int dig = 0;
-
-	while (aux > 0) {
-		aux /= 10;
-		dig++;
+	int dig;
+	for (dig = 7; dig >= 0; dig--) {
+		if (buffer[dig] != 0)
+			break;
 	}
+	dig++;
 
 	for (int i = 0; i < dig; i++) {
 		if (!isdigit(buffer[i])) {
@@ -32,32 +31,36 @@ string DtoH(int num, int size) {
 	return addCeros(s, size - s.size());
 }
 
-void see_section(int fil, vector<int*> memory) {
+void see_section(string dir, vector<int*> memory) {
 
-	fil *= 16;
+	dir[dir.size() - 1] = '0';
+
+	int fil = stoi(dir, nullptr, 16);
 	int cond = true;
 
 	for (int i = fil; i < fil + (16 * 16) && cond; i += 16) {
 
-		//Imprime filas
-		cout << endl << (string)DtoH(i, 8) << "	-->	";
+		//Imprime direccion de la fila
+		cout << endl << DtoH(i, 8) << " >>> ";
 
 		for (int j = i; j < i + 16 && cond; j++) {
 
 			if (j < memory.size()) {
-				//Imprime Valores
+				//Imprime valor en hex
 				cout << " " << DtoH(*memory[j], 2);
 			}
 			else {
 				cond = false;
 			}
 		}
-		cout << " --> ";
-		//imprime valor en ascii
+
+		cout << " >>> ";
+		cond = true;
+
 		for (int j = i; j < i + 16 && cond; j++) {
 
 			if (j < memory.size()) {
-				//Imprime Valores
+				//imprime valor en ascii
 				if (isalpha(*memory[j]) || isdigit(*memory[j])) {
 					cout << (char)*memory[j];
 				}
@@ -70,4 +73,6 @@ void see_section(int fil, vector<int*> memory) {
 			}
 		}
 	}
+
+	cout << "\n";
 }

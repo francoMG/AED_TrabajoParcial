@@ -3,27 +3,28 @@
 void Events(vector<int*> memory) {
 
 	int end = false;
-	char input;
+	string input;
 
 	while (!end) {
 
-		cout << "1- Ver seccion de memoria" << endl
-			<< "2- Salir" << endl;
+		cin.clear();
+
+		cout << "\n 1- VER SECCION DE MEMORIA"
+			<< "\n Q- SALIR" << endl << endl
+			<< " >>> ";
+
 		cin >> input;
 
-		switch (input) {
-		case '1':
-		{
-			cout << "Ingrese la fila de la memoria: ";
-			cin >> input;
-			see_section(input, memory);
-		}
-		case '2':
-		{
+		if (toupper(input[0]) == 'Q') {
+
 			end = true;
 		}
-		default:
-			break;
+		else if (input[0] == '1') {
+
+			cout << "\nIngrese la direccion de memoria (hex): ";
+
+			cin >> input;
+			see_section( input, memory);
 		}
 	}
 }
