@@ -1,0 +1,6 @@
+﻿  Source.cpp
+c:\users\user\documents\source tree\trabajo_parcial\trabajo_parcial\hexadecimal.h(32): warning C4267: 'argumento': conversión de 'size_t' a 'int'; posible pérdida de datos
+c:\users\user\documents\source tree\trabajo_parcial\trabajo_parcial\hexadecimal.h(15): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _itoa. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdlib.h(1334): note: vea la declaración de 'itoa'
+c:\users\user\documents\source tree\trabajo_parcial\trabajo_parcial\source.cpp(14): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+  Trabajo_Parcial.vcxproj -> C:\Users\user\Documents\Source Tree\Trabajo_Parcial\x64\Debug\Trabajo_Parcial.exe

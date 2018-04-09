@@ -1,61 +1,56 @@
 #pragma once
 
-/*
-Funte: http://www.solveet.com/exercises/decimal-a-hexadecimal-/605/solution-3229
-*/
+string addCeros(string s, int cant) {
 
-string DtoH(short num) {
+	for (int i = 0; i < cant; i++)
+		s.insert(s.begin(), '0');
 
-	string res;
+	return s;
+}
 
-	int num3 = 0, num4 = 0, contador = 0;
-	char letra;
-	char numero_String[100];
-	float num2 = 1;
-	static int indice;
-	num2 = num;
-	while (num2 >= 1) {
-		num2 = num2 / 16;
-		contador++;
+string DtoH(int num, int size) {
+
+	string s;
+	char buffer[8];
+	itoa(num, buffer, 16);
+
+	int aux = num;
+	int dig = 0;
+
+	while (aux > 0) {
+		aux /= 10;
+		dig++;
 	}
 
-	string numero_hex = "null";
-
-	for (indice = 0; indice < contador; indice++) {
-		num3 = num / 16;
-		num4 = num % 16;
-		if (num4 < 10) {
-			sprintf(numero_String, "%d", num4);
-			numero_hex[contador - indice - 1] = *numero_String;
+	for (int i = 0; i < dig; i++) {
+		if (!isdigit(buffer[i])) {
+			buffer[i] = toupper(buffer[i]);
 		}
-		else {
-			switch (num4) {
-			case 10:
-				letra = 'A';
-				break;
-			case 11:
-				letra = 'B';
-				break;
-			case 12:
-				letra = 'C';
-				break;
-			case 13:
-				letra = 'D';
-				break;
-			case 14:
-				letra = 'E';
-				break;
-			case 15:
-				letra = 'F';
-				break;
+		s += buffer[i];
+	}
+
+	return addCeros(s, size - s.size());
+}
+
+void see_section(int fil, vector<int*> memory) {
+
+	fil *= 16;
+	int cond = true;
+
+	for (int i = fil; i < fil + (16 * 16) && cond; i += 16) {
+
+		//Imprime filas
+		cout << endl << DtoH(i, 8) << " -->";
+
+		for (int j = i; j < i + 16 && cond; j++) {
+
+			if (j < memory.size()) {
+				//Imprime Valores
+				cout << "  " << DtoH(*memory[j], 2);
 			}
-			numero_hex[contador - indice - 1] = letra;
+			else {
+				cond = false;
+			}
 		}
-		num = num3;
 	}
-
-	for (indice = 0; indice < contador; indice++)
-		res += numero_hex[indice];
-
-	return res;
 }

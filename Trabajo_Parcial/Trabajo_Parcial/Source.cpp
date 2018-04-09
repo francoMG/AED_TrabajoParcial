@@ -11,17 +11,28 @@ using namespace std;
 
 int main() {
 
-	vector<short> memory;
+	srand(time(NULL));
 
-	for (int i = 0; i < 1000; i++)
-		memory.push_back(rand() % 256);
+	//es dinamico para que la memoria no se copie tantas veces
+	vector<int*> memory;
 
-	int a = 1;
-	cout << "  ";
-	for (int i = 0; i < memory.size(); i++) {
-		if (a == 16) { a = 1; cout << endl; }
-		cout << DtoH(memory[i]) << setw(4);
-		a++;
+	for (int i = 0; i < 2048; i++)
+		memory.push_back(new int(i % 256));
+
+	/* Reporte de toda la memoria:*/
+	for (int i = 0; i < memory.size() / 16; i += 16)
+		see_section(i, memory);
+
+
+	//Roperte de 16 filas apartir de la fila 8:
+	//see_section(8, memory);
+
+
+
+	//eliminar memoria
+	while (memory.size() > 0) {
+		delete memory[0];
+		memory.erase(memory.begin());
 	}
 
 	_getch();
