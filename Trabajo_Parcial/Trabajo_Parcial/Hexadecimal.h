@@ -14,7 +14,7 @@ string DtoH(int num, int size) {
 	char buffer[8];
 	itoa(num, buffer, 16);
 
-	int aux = num;
+	int aux = num / 16;
 	int dig = 0;
 
 	while (aux > 0) {
@@ -40,13 +40,30 @@ void see_section(int fil, vector<int*> memory) {
 	for (int i = fil; i < fil + (16 * 16) && cond; i += 16) {
 
 		//Imprime filas
-		cout << endl << DtoH(i, 8) << " -->";
+		cout << endl << (string)DtoH(i, 8) << "	-->	";
 
 		for (int j = i; j < i + 16 && cond; j++) {
 
 			if (j < memory.size()) {
 				//Imprime Valores
-				cout << "  " << DtoH(*memory[j], 2);
+				cout << " " << DtoH(*memory[j], 2);
+			}
+			else {
+				cond = false;
+			}
+		}
+		cout << " --> ";
+		//imprime valor en ascii
+		for (int j = i; j < i + 16 && cond; j++) {
+
+			if (j < memory.size()) {
+				//Imprime Valores
+				if (isalpha(*memory[j]) || isdigit(*memory[j])) {
+					cout << (char)*memory[j];
+				}
+				else {
+					cout << ".";
+				}
 			}
 			else {
 				cond = false;

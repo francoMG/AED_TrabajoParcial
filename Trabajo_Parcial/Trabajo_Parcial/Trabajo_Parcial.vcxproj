@@ -22,6 +22,7 @@
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Events.h" />
     <ClInclude Include="Hexadecimal.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

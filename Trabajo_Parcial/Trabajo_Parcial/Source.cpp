@@ -1,6 +1,5 @@
 #include <iostream>
 #include <conio.h>
-#include <string>
 #include <iomanip>
 #include <vector>
 #include <stdio.h>
@@ -8,6 +7,7 @@
 using namespace std;
 
 #include "Hexadecimal.h"
+#include "Events.h"
 
 int main() {
 
@@ -16,18 +16,18 @@ int main() {
 	//es dinamico para que la memoria no se copie tantas veces
 	vector<int*> memory;
 
-	for (int i = 0; i < 2048; i++)
-		memory.push_back(new int(i % 256));
+	for (int i = 0; i < 1000000; i++)
+		memory.push_back(new int(rand() % 256));
 
-	/* Reporte de toda la memoria:*/
-	for (int i = 0; i < memory.size() / 16; i += 16)
-		see_section(i, memory);
+	//Reporte de toda la memoria: NO HACER PQ SE DEMORA MUCHO :V
+	//for (int i = 0; i < memory.size() / 16; i += 16)
+	//	see_section(i, memory);
 
 
 	//Roperte de 16 filas apartir de la fila 8:
-	//see_section(8, memory);
+	//see_section(16, memory);
 
-
+	//Events(memory);
 
 	//eliminar memoria
 	while (memory.size() > 0) {
@@ -35,6 +35,5 @@ int main() {
 		memory.erase(memory.begin());
 	}
 
-	_getch();
 	return 0;
 }
