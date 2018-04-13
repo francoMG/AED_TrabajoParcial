@@ -23,6 +23,8 @@ int main() {
 		*memory[i] = i % 256;
 	}
 
+
+
 	//Reporte de toda la memoria: NO HACER PQ SE DEMORA MUCHO :V
 	//for (int i = 0; i < memory.size() / 16; i += 16)
 	//	see_section(i, memory);

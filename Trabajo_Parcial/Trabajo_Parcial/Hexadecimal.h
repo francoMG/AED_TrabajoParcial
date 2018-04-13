@@ -33,8 +33,9 @@ string DtoH(int num, int size) {
 
 void see_section(string dir, vector<int*> memory) {
 
-	dir[dir.size() - 1] = '0';
-
+	cout << dir << endl;
+	dir[dir.size() - 1] = '0';//Para que se vea ordenado. A0F7 => A0F0
+	cout << dir << endl;
 	int fil = stoi(dir, nullptr, 16);
 	int cond = true;
 
