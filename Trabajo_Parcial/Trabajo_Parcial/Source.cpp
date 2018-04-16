@@ -14,28 +14,14 @@ int main() {
 
 	srand(time(NULL));
 
-	//Es dinamico para que la memoria no se copie tantas veces
-	vector<int*> memory(1000);//Cambiar a 1000000 para la presentacion
+	int memory_size = 1 << 20;
+	char* memory = new char[memory_size];
 
-	//Inicializar con valores aleatorios para la presentacion
-	for (int i = 0; i < memory.size(); i++) {
-		memory[i] = new int;
-		*memory[i] = i % 256;
-	}
+	for (int i = 0; i < memory_size; i++) memory[i] = i % 127;
 
+	Events(memory, memory_size);
 
-
-	//Reporte de toda la memoria: NO HACER PQ SE DEMORA MUCHO :V
-	//for (int i = 0; i < memory.size() / 16; i += 16)
-	//	see_section(i, memory);
-
-	Events(memory);
-
-	//Liberar memoria
-	while (memory.size() > 0) {
-		delete memory[0];
-		memory.erase(memory.begin());
-	}
+	delete memory;
 
 	return 0;
 }

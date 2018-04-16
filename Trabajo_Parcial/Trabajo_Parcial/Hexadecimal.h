@@ -31,46 +31,37 @@ string DtoH(int num, int size) {
 	return addCeros(s, size - s.size());
 }
 
-void see_section(string dir, vector<int*> memory) {
+void see_section(string dir, char *memory, int memory_size) {
 
-	cout << dir << endl;
 	dir[dir.size() - 1] = '0';//Para que se vea ordenado. A0F7 => A0F0
-	cout << dir << endl;
-	int fil = stoi(dir, nullptr, 16);
-	int cond = true;
 
-	for (int i = fil; i < fil + (16 * 16) && cond; i += 16) {
+	int fil = stoi(dir, nullptr, 16);
+
+	cout << "\n             00 01 02 03 04 05 06 07  08 09 0A 0B 0C 0D 0E 0F\n" <<
+		"             ^^ ^^ ^^ ^^ ^^ ^^ ^^ ^^  ^^ ^^ ^^ ^^ ^^ ^^ ^^ ^^";
+
+	for (int i = fil; i < fil + (16 * 16) && i < memory_size; i += 16) {
 
 		//Imprime direccion de la fila
-		cout << endl << DtoH(i, 8) << " >>> ";
+		cout << "\n" << DtoH(i, 8) << " >>>";
 
-		for (int j = i; j < i + 16 && cond; j++) {
+		//Imprime valor en hex
+		for (int j = i; j < i + 16 && j < memory_size; j++) {
 
-			if (j < memory.size()) {
-				//Imprime valor en hex
-				cout << " " << DtoH(*memory[j], 2);
-			}
-			else {
-				cond = false;
-			}
+			if (j % 8 == 0) cout << " ";
+			cout << DtoH((int)memory[j], 2) << " ";
 		}
 
-		cout << " >>> ";
-		cond = true;
+		cout << ">>> ";
 
-		for (int j = i; j < i + 16 && cond; j++) {
-
-			if (j < memory.size()) {
-				//imprime valor en ascii
-				if (isalpha(*memory[j]) || isdigit(*memory[j])) {
-					cout << (char)*memory[j];
-				}
-				else {
-					cout << ".";
-				}
+		//imprime valor en ascii
+		for (int j = i; j < i + 16 && j < memory_size; j++) {
+			
+			if (memory[j] > 32 && memory[j] < 127) {
+				cout << memory[j];
 			}
 			else {
-				cond = false;
+				cout << ".";
 			}
 		}
 	}

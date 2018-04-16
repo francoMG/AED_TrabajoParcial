@@ -1,6 +1,6 @@
 #pragma once
 
-void Events(vector<int*> memory) {
+void Events(char *memory, int memory_size) {
 
 	int end = false;
 	string input;
@@ -10,8 +10,9 @@ void Events(vector<int*> memory) {
 		cin.clear();
 
 		cout << "\n 1- VER SECCION DE MEMORIA"
-			<< "\n Q- SALIR" << endl << endl
-			<< " >>> ";
+			<< "\n Q- SALIR"
+			<< "\n %- OTHER"
+			<< "\n\n >>> ";
 
 		cin >> input;
 
@@ -24,7 +25,10 @@ void Events(vector<int*> memory) {
 			cout << "\nIngrese la direccion de memoria (hex): ";
 
 			cin >> input;
-			see_section( input, memory);
+			see_section( input, memory, memory_size);
+		}
+		else {
+			end = true;
 		}
 	}
 }
