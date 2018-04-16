@@ -4,9 +4,9 @@
 #include <iomanip>
 #include <vector>
 #include <stdio.h>
+#include <windows.h>
 
 using namespace std;
-
 #include "Hexadecimal.h"
 #include "Events.h"
 
@@ -14,10 +14,12 @@ int main() {
 
 	srand(time(NULL));
 
-	int memory_size = 1 << 20;
-	char* memory = new char[memory_size];
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0F);//Imprime texto en blanco, ver = (linea 63 Hexadecimal.h)
 
-	for (int i = 0; i < memory_size; i++) memory[i] = i % 127;
+	int memory_size = 1 << 20;
+	unsigned char* memory = new unsigned char[memory_size];
+
+	for (int i = 0; i < memory_size; i++) memory[i] = rand()%127;
 
 	Events(memory, memory_size);
 

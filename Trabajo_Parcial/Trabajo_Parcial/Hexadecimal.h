@@ -8,7 +8,7 @@ string addCeros(string s, int cant) {
 	return s;
 }
 
-string DtoH(int num, int size) {
+string decToHex(int num, int size) {
 
 	string s;
 	char buffer[8] = { 0,0,0,0,0,0,0,0 };
@@ -31,7 +31,9 @@ string DtoH(int num, int size) {
 	return addCeros(s, size - s.size());
 }
 
-void see_section(string dir, char *memory, int memory_size) {
+void seeSection(string dir, unsigned char *memory, int memory_size) {
+
+	int d_val = stoi(dir, nullptr, 16);
 
 	dir[dir.size() - 1] = '0';//Para que se vea ordenado. A0F7 => A0F0
 
@@ -43,13 +45,25 @@ void see_section(string dir, char *memory, int memory_size) {
 	for (int i = fil; i < fil + (16 * 16) && i < memory_size; i += 16) {
 
 		//Imprime direccion de la fila
-		cout << "\n" << DtoH(i, 8) << " >>>";
+		cout << "\n" << decToHex(i, 8) << " >>>";
 
 		//Imprime valor en hex
 		for (int j = i; j < i + 16 && j < memory_size; j++) {
 
-			if (j % 8 == 0) cout << " ";
-			cout << DtoH((int)memory[j], 2) << " ";
+			if (j % 8 == 0) {
+
+				cout << " ";
+			}
+
+			if (j != d_val) {
+
+				cout << decToHex((int)memory[j], 2) << " ";
+			}
+			else {
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0A);//Imprime texto en verde
+				cout << decToHex((int)memory[j], 2) << " ";
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0F);//Regresa a la impresion en blanco
+			}
 		}
 
 		cout << ">>> ";
@@ -58,13 +72,35 @@ void see_section(string dir, char *memory, int memory_size) {
 		for (int j = i; j < i + 16 && j < memory_size; j++) {
 			
 			if (memory[j] > 32 && memory[j] < 127) {
-				cout << memory[j];
+				if (j != d_val) {
+
+					cout << memory[j];
+				}
+				else {
+					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0A);//Imprime texto en verde
+					cout << memory[j];
+					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0F);//Regresa a la impresion en blanco
+				}
 			}
 			else {
-				cout << ".";
+				if (j != d_val) {
+
+					cout << ".";
+				}
+				else {
+					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0A);//Imprime texto en verde
+					cout << ".";
+					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0F);//Regresa a la impresion en blanco
+				}
 			}
 		}
 	}
 
 	cout << "\n";
+}
+
+void writeVar(unsigned char *memory, int dir, unsigned char *var, int size) {
+	
+	for (int i = 0; i < size; i++)
+		memory[dir + i] = var[i];
 }
