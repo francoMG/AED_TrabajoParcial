@@ -1,6 +1,6 @@
 #pragma once
 
-void Events(unsigned char *memory, int memory_size) {
+void Events(unsigned char *memory, int memory_size, map<string, unsigned char> &vars) {
 
 	int end = false;
 	string input;
