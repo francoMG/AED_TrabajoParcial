@@ -1,4 +1,5 @@
 #include <iostream>
+#include <map>
 #include <string>
 #include <conio.h>
 #include <iomanip>
@@ -9,6 +10,7 @@
 using namespace std;
 #include "Hexadecimal.h"
 #include "Events.h"
+#include "var.h"
 
 int main() {
 
@@ -20,8 +22,10 @@ int main() {
 	unsigned char* memory = new unsigned char[memory_size];
 
 	for (int i = 0; i < memory_size; i++) memory[i] = rand()%127;
+	
+	map<string, unsigned char> vars;
 
-	Events(memory, memory_size);
+	Events(memory, memory_size, vars);
 
 	delete memory;
 
