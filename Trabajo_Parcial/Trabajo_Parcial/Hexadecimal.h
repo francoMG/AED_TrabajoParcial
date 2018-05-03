@@ -70,7 +70,7 @@ void seeSection(string dir, unsigned char *memory, int memory_size) {
 
 		//imprime valor en ascii
 		for (int j = i; j < i + 16 && j < memory_size; j++) {
-			
+
 			if (memory[j] > 32 && memory[j] < 127) {
 				if (j != d_val) {
 
@@ -100,7 +100,7 @@ void seeSection(string dir, unsigned char *memory, int memory_size) {
 }
 
 void writeVar(unsigned char *memory, int dir, unsigned char *var, int size) {
-	
+
 	for (int i = 0; i < size; i++)
 		memory[dir + i] = var[i];
 }

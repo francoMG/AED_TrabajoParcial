@@ -8,9 +8,9 @@
 #include <windows.h>
 
 using namespace std;
+#include "var.h"
 #include "Hexadecimal.h"
 #include "Events.h"
-#include "var.h"
 
 int main() {
 
@@ -22,7 +22,7 @@ int main() {
 	unsigned char* memory = new unsigned char[memory_size];
 
 	for (int i = 0; i < memory_size; i++) memory[i] = rand()%127;
-	
+
 	vector<var> vars;
 
 	Events(memory, memory_size, vars);
