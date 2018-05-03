@@ -23,7 +23,7 @@ int main() {
 
 	for (int i = 0; i < memory_size; i++) memory[i] = rand()%127;
 	
-	vector<vec> vars;
+	vector<var> vars;
 
 	Events(memory, memory_size, vars);
 
