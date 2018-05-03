@@ -1,8 +1,8 @@
 #pragma once
 
-int selfAssign(vector<var> &vars){
-
-	return vars[vars.size()-1].dir + vars[vars.size()-1].tp;
+int selfAssign(vector<var> &vars) {
+	if (vars.size() == 0) return 0;
+	return vars[vars.size() - 1].dir + vars[vars.size() - 1].tp + 1;
 }
 
 void Events(unsigned char *memory, int memory_size, vector<var> &vars) {
@@ -99,7 +99,7 @@ void Events(unsigned char *memory, int memory_size, vector<var> &vars) {
 		else if (input[0] == '4') { //Declarar puntero
 
 			string nv;
-			int tp, val;
+			int tp, val, dir;
 
 			cout << "\n Ingrese el nombre de la varible: "
 				<< "\n\n >>>";
@@ -117,6 +117,13 @@ void Events(unsigned char *memory, int memory_size, vector<var> &vars) {
 			cout << "\nIngrese el valor: "
 				<< "\n\n >>> ";
 			cin >> val;
+
+			vars.push_back(var(nv, tp, selfAssign(vars)));
+
+			writeVar(memory, selfAssign(vars), (unsigned char *)&val, tp);
+
+			cout << "\nDireccion de Memoria: "
+				<< "\n\n >>> " << selfAssign(vars) << "\n\n";
 		}
 
 		else { //Salir
