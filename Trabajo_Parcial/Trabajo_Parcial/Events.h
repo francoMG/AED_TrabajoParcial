@@ -96,7 +96,7 @@ void Events(unsigned char *memory, int memory_size, vector<var> &vars) {
 			}
 		}
 
-		else if (input[0] == '4') { //Declarar arreglo
+		else if (input[0] == '4') { //Declarar puntero
 
 			string nv;
 			int tp, val;
