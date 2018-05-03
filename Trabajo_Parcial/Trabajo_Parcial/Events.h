@@ -86,7 +86,7 @@ void Events(unsigned char *memory, int memory_size, vector<var> &vars) {
 
 			for (int i = 0; i < ta; i++) {
 
-				vars.push_back(var(nv+to_string(i)), tp,selfAssign(vars));///////////////////////////////
+				vars.push_back(var(nv+to_string(i), tp,selfAssign(vars)));///////////////////////////////
 
 				cout << "\nIngrese el valor " << i << " del arreglo: "
 					<< "\n\n >>> ";
